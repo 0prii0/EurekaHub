@@ -8,13 +8,36 @@ const Auth = ({ type, onSubmit }) => {
     confirmPassword: "",
   });
 
+  const [error, setError] = useState("")
+
   const handleChange = (e) => {
     e.preventDefault();
     setFormData({...formData, [e.target.name]: e.target.value});
+    setError("");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // validation for password === confirmpassword
+    if(type === "register"){
+      if (formData.password !== FormData.confirmPassword) {
+        setError("Password do not match");
+        return;
+      }
+    }
+
+
+    // validation for logins
+
+    if(type === "login") {
+      if(!formData.email || formData.password) {
+        setError("Please fill in all fields")
+        return;
+      }
+    }
+
+
     onSubmit(formData);
   };
 
@@ -61,6 +84,10 @@ const Auth = ({ type, onSubmit }) => {
         />
       )}
 
+
+
+      {error && <p className="text-red-500 text-sm">{error}</p>}
+      
       <button 
       type="submit"
       className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
