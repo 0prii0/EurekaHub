@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Auth = (type, onSubmit) => {
+const Auth = ({ type, onSubmit }) => {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -43,6 +43,7 @@ const Auth = (type, onSubmit) => {
       <input
         type="password"
         name="password"
+        placeholder="password"
         value={formData.password}
         onChange={handleChange}
         className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -52,12 +53,13 @@ const Auth = (type, onSubmit) => {
         <input
           type="password"
           name="confirmPassword"
+          placeholder="confirm password"
           value={formData.confirmPassword}
           onChange={handleChange}
           className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         />
-      )};
+      )}
 
       <button 
       type="submit"
